@@ -11,6 +11,7 @@
         border-bottom-left-radius: .3rem;
         transition: .3s ease-in-out;
         box-shadow: -1px 0 4px hsla(var(--hue-color), 64%, 4%, 0.05);
+        z-index: var(--z-fixed);
     }
     .nav__menu--active {
         right: 0;

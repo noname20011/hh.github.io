@@ -68,12 +68,29 @@ videoBtnToggle.onclick = () => {
     }
 }
 
+// ================= ACTIVE LINK ============//
+const sectionLinks = $$('section[id]')
+
+function activeLink() {
+    let currentHeight = this.scrollY
+    sectionLinks.forEach((sectionLink) => {
+        let idSection = sectionLink.getAttribute('id')
+        const heightSection = sectionLink.offsetHeight
+        const topSection = sectionLink.offsetTop
+        if (currentHeight > topSection && currentHeight <= topSection + heightSection) {
+            $('.nav__menu a[href*=' + idSection + ']').classList.add('link--active')
+        } else {
+            $('.nav__menu a[href*=' + idSection + ']').classList.remove('link--active')
+        }
+    })
+}
 
 
 // ================= MOTION COMMON ============//
 window.onscroll = function() {
     scrollHeader()
     scrollUp()
+    activeLink()
 }
 
 
@@ -119,6 +136,7 @@ sr.reveal(`.home__data, .home__social-link, .home__info,
            .footer__data, .footer__rights`, {
     origin: 'top',
     interval: 80,
+
 })
 
 sr.reveal(`.about__data, 
@@ -133,3 +151,36 @@ sr.reveal(`.about__img-overlay,
     origin: 'right',
     interval: 80,
 })
+
+
+// ============ CHANGE THEME =================== //
+const themeBtn = $('#theme-button')
+const darkTheme = 'dark-mode'
+const iconTheme = 'uil-sun'
+const titleTheme = $('#theme-title')
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+
+const getCurrentIcon = () => themeBtn.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun'
+if (selectedTheme) {
+    document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+    themeBtn.classList[selectedIcon === 'uil-moon' ? 'add' : 'remove'](iconTheme)
+
+}
+
+
+themeBtn.onclick = function() {
+
+    document.body.classList.toggle(darkTheme)
+    themeBtn.classList.toggle(iconTheme)
+    let isDarkThem = (themeBtn.classList.contains(iconTheme))
+    if (isDarkThem) {
+        titleTheme.innerText = 'Light mode'
+    } else {
+        titleTheme.innerText = 'Dark mode'
+    }
+    localStorage.setItem('selected-theme', getCurrentTheme())
+    localStorage.setItem('selected-icon', getCurrentIcon())
+}
