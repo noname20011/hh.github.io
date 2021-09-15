@@ -53,6 +53,10 @@
     row-gap: 2rem;
 }
 
+.nav__item {
+    padding: .7rem 1rem;
+}
+
 .nav__link {
     padding: .7rem 1rem;
     font-weight: var(--font-semi-bold);
