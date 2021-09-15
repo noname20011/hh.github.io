@@ -50,10 +50,11 @@
     display: flex;
     margin-top: 50px;
     flex-direction: column;
-    row-gap: 1.5rem;
+    row-gap: 2rem;
 }
 
 .nav__link {
+    padding: .7rem 1rem;
     font-weight: var(--font-semi-bold);
     text-transform: uppercase;
     color: var(--text-color-light);
